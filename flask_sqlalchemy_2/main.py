@@ -12,7 +12,28 @@ app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 
 def main():
     db_session.global_init("db/blogs.db")
-    app.run(port=8080, host='127.0.0.1')
+    user = User()
+    user.name = "Ridley"
+    user.about = "Scott"
+    user.age = 21
+    user.position = "captain"
+    user.speciality = "research engineer"
+    user.address = "module_1"
+    user.email = "scott_chief@mars.org"
+    db_sess = session.create_session()
+    db_sess.add(user)
+    job = Jobs()
+    job.team_leader = 1
+    job.job = "deployment of residential modules 1 and 2"
+    job.age = 21
+    job.work_size = 15
+    job.collaborators = "2, 3"
+    job.start_date = datetime.now()
+    job.is_finished = False
+    db_sess = session.create_session()
+    db_sess.add(job)
+    db_sess.commit()
+    #app.run(port=8080, host='127.0.0.1')
 
 @app.route("/")
 def index():
